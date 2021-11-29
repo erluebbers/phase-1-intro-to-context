@@ -62,9 +62,12 @@ function wagesEarnedOnDate (employeeRecord, date) {
 
 function allWagesFor (employeeRecord) {
   let wagesArray = []
-  let dateArray = employeeRecord.timeInEvents.filter(array => array.date)
-  for (const value of dateArray) {
-    wagesArray.push(hoursWorkedOnDate(employeeRecord, value))
-  }
-  return wagesArray.reduce((a, b) => a + b, 0)
+  // employeeRecord.timeInEvents.forEach(timeInEvent => wagesArray.push(wagesEarnedOnDate(employeeRecord, timeInEvent.date)))
+  return employeeRecord.timeInEvents.reduce((runningTotal, timeInEvent) => {
+    return runningTotal + wagesEarnedOnDate(employeeRecord, timeInEvent.date)
+  }, 0)
+}
+
+function calculatePayroll () {
+  
 }
